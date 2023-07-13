@@ -30,6 +30,9 @@ const laptopSchema = mongoose.Schema({
     },
     description: {
         type: String
+    },
+    image:{
+        type: Object
     }
 })
 

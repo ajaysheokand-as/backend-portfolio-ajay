@@ -20,6 +20,7 @@ app.use(express.json())
 app.use("/vehicle", require("./routes/vehicleRoutes"));
 app.use("/users", require("./routes/userRoutes"));
 app.use("/laptop", require("./routes/laptopRoutes"));
+app.use('/upload', require('./routes/imageUpload'));
 app.use(errorHandler)
 // app.get('/api/users', (req, res) => {
 //     res.send('Hello, from users');

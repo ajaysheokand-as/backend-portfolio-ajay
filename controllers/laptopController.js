@@ -3,6 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 // Add Laptop
 const addLaptop = asyncHandler(async (req, res) => {
+  console.log("addLaptop=>",req.body.body);
   const {
     brand,
     model,
@@ -15,7 +16,8 @@ const addLaptop = asyncHandler(async (req, res) => {
     price,
     discount,
     description,
-  } = req.body;
+    image
+  } = req.body.body;
   if (!brand || !ram || !processor || !price) {
     res.status(400);
     throw new Error("Brand Name, RAM, Processor and Price is Mandatory");
@@ -33,6 +35,7 @@ const addLaptop = asyncHandler(async (req, res) => {
     price,
     discount,
     description,
+    image
   });
   console.log(`Laptop Added Successful ${laptop}`);
   if (laptop) {
