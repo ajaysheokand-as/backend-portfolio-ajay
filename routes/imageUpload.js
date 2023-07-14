@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const router = express.Router();
+const fs = require('fs');
 
 // Configure the multer storage
 const storage = multer.diskStorage({
@@ -26,6 +27,23 @@ router.post('/uploadImage', upload.single(`image`), (req, res) => {
   } else {
     res.status(500).json({ error: 'Error uploading image', });
   }
+});
+
+router.delete('/uploadImage/:imageName', (req, res) => {
+  const imageName = req.params.imageName;
+  console.log("This is imageName=>33 ", imageName)
+  const imagePath = './assets/product_imgs/' + imageName; // Specify the path of the image to be deleted
+  console.log("This is imagePath=>", imagePath);
+  // Perform the deletion here
+  // For example:
+  fs.unlink(imagePath, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('An error occurred while deleting the image.');
+    }
+
+    res.send('Image deleted successfully.');
+  });
 });
 
 module.exports = router;
