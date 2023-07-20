@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const router = express.Router();
 const fs = require('fs');
+const path = require('path');
+
 
 // Configure the multer storage
 const storage = multer.diskStorage({
@@ -29,6 +31,7 @@ router.post('/uploadImage', upload.single(`image`), (req, res) => {
   }
 });
 
+// Delete Image
 router.delete('/uploadImage/:imageName', (req, res) => {
   const imageName = req.params.imageName;
   console.log("This is imageName=>33 ", imageName)
@@ -43,6 +46,30 @@ router.delete('/uploadImage/:imageName', (req, res) => {
     }
 
     res.send('Image deleted successfully.');
+  });
+});
+
+// Fetch image
+router.get('/getImage/:imageName', (req, res) => {
+  const  { imageName }  = req.params;
+  // console.log("req.params=>, imagePath __dirname", imageName, __dirname);
+  const imagePath = path.join(__dirname, '../assets/product_imgs/', imageName);
+  
+  console.log("req.params=> 59, imagePath", req.params, imagePath);
+  // Read the image file
+  fs.readFile(imagePath, (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(404).send('Image not found');
+    }
+
+    // Set the appropriate headers
+    res.setHeader('Content-Type', 'image/jpeg');
+    res.setHeader('Content-Length', data.length);
+
+    // Send the image data to the frontend
+    console.log("This is data", data);
+    res.send(data);
   });
 });
 
