@@ -30,6 +30,14 @@ const userSchema = mongoose.Schema({
     address: {
         type: String,
         required: false
+    },
+    image: {
+        type: Object,
+        require: false
+    },
+    adminType: {
+        type: Object,
+        require: false
     }
 },
 {

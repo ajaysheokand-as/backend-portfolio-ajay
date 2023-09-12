@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 //@route POST /users/register
 //@access public
 const registerUser = asyncHandler(async (req, res) => {
-    const {userName, mobileNumber, email, password, address} = req.body;
+    const {userName, mobileNumber, email, password, address, image, adminType} = req.body;
     if(!userName || !mobileNumber || !password){
         res.status(400);
         throw new Error("User Name, Mobile Number and Password is Mandatory");
@@ -26,7 +26,9 @@ const registerUser = asyncHandler(async (req, res) => {
         mobileNumber,
         password: hashedPassword,
         email,
-        address
+        address,
+        image,
+        adminType
     })
     console.log(`User Created Successful ${user}`)
     if(user){
