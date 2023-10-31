@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 // Add Laptop
 const addLaptop = asyncHandler(async (req, res) => {
-  console.log("addLaptop=>",req.body.body);
+  console.log("addLaptop=>", req.body);
   const {
     brand,
     model,
@@ -16,8 +16,8 @@ const addLaptop = asyncHandler(async (req, res) => {
     price,
     discount,
     description,
-    image
-  } = req.body.body;
+    image,
+  } = req.body;
   if (!brand || !ram || !processor || !price) {
     res.status(400);
     throw new Error("Brand Name, RAM, Processor and Price is Mandatory");
@@ -35,7 +35,7 @@ const addLaptop = asyncHandler(async (req, res) => {
     price,
     discount,
     description,
-    image
+    image,
   });
   console.log(`Laptop Added Successful ${laptop}`);
   if (laptop) {
@@ -64,21 +64,24 @@ const getLaptop = asyncHandler(async (req, res) => {
 });
 
 // Update Laptop
-const updateLaptop = asyncHandler(async(req, res)=>{
-    const laptop = await Laptop.find({ _id: req.params.id });
-    console.log("Laptop found for update",laptop);
-    if(!laptop){
-        res.status(404);
-        throw new Error("Laptop not Found");
-    }
+const updateLaptop = asyncHandler(async (req, res) => {
+  const laptop = await Laptop.find({ _id: req.params.id });
+  console.log("Laptop found for update", laptop);
+  if (!laptop) {
+    res.status(404);
+    throw new Error("Laptop not Found");
+  }
 
-    const updatedLaptop = await Laptop.findOneAndUpdate(
-        {_id: req.params.id},
-        req.body,
-        {new: true}
-    );
-    res.status(200).json({ message: "You Updated the laptop Successfully",updatedLaptop: updatedLaptop});
-})
+  const updatedLaptop = await Laptop.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    { new: true }
+  );
+  res.status(200).json({
+    message: "You Updated the laptop Successfully",
+    updatedLaptop: updatedLaptop,
+  });
+});
 
 // Delete Laptop
 const deleteLaptop = asyncHandler(async (req, res) => {
@@ -95,4 +98,10 @@ const deleteLaptop = asyncHandler(async (req, res) => {
     .json({ message: "Your deleted Laptop", Laptop: laptopDeleted });
 });
 
-module.exports = { addLaptop, getAllLaptop, getLaptop, updateLaptop, deleteLaptop };
+module.exports = {
+  addLaptop,
+  getAllLaptop,
+  getLaptop,
+  updateLaptop,
+  deleteLaptop,
+};
