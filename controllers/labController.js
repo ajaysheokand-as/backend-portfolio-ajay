@@ -1,4 +1,4 @@
-const test = require("../models/medical/testModel.js");
+const tests = require("../models/medical/testModel.js");
 const categories = require("../models/medical/categoryModel.js");
 // const category = require("../models/categoryModel.js");
 
@@ -52,7 +52,7 @@ module.exports.deleteCategory = async (req, res) => {
 module.exports.addTest = async (req, res) => {
   console.log(req.body, "req----- Add Test");
 
-  const data = await test.create(req.body);
+  const data = await tests.create(req.body);
   if (data) {
     res.status(200).send({
       status: "success",
@@ -69,7 +69,7 @@ module.exports.addTest = async (req, res) => {
 
 // Get all test Data
 module.exports.fetchTestData = async (req, res) => {
-  const User = await test.find();
+  const User = await tests.find();
   if (User) {
     res.status(204).send({
       status: "success",
@@ -87,7 +87,7 @@ module.exports.fetchTestData = async (req, res) => {
 // for delete data--users
 module.exports.deleteTest = async (req, res) => {
   console.log("This is req.params.id", req.params);
-  const User = await test.findByIdAndDelete(req.params.id);
+  const User = await tests.findByIdAndDelete(req.params.id);
 
   if (User) {
     return res.status(404).json({ error: "User not found" });
