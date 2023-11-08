@@ -27,9 +27,10 @@ app.use(
 );
 app.use(require("./routes/medicalRoutes"));
 app.use(errorHandler);
-// app.get('/api/users', (req, res) => {
-//     res.send('Hello, from users');
-//   });
+
+app.get("testing", (req, res) => {
+  res.send("Hello, Testing Successful");
+});
 
 // app.get('/api/')
 
