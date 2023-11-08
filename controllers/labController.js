@@ -23,7 +23,7 @@ module.exports.addCategory = async (req, res) => {
 // get all Category
 module.exports.fetchAllCategory = async (req, res) => {
   const allCategory = await category.find();
-  if (deepData) {
+  if (allCategory) {
     res.status(204).send({
       status: "success",
       data: allCategory,
