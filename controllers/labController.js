@@ -1,10 +1,10 @@
 const test = require("../models/medical/testModel.js");
-const category = require("../models/medical/categoryModel.js");
+const categories = require("../models/medical/categoryModel.js");
 // const category = require("../models/categoryModel.js");
 
 // for add category
 module.exports.addCategory = async (req, res) => {
-  const categoryData = await category.create(req.body);
+  const categoryData = await categories.create(req.body);
 
   if (categoryData) {
     res.status(201).send({
@@ -22,7 +22,7 @@ module.exports.addCategory = async (req, res) => {
 
 // get all Category
 module.exports.fetchAllCategory = async (req, res) => {
-  const allCategory = await category.find();
+  const allCategory = await categories.find();
   if (allCategory) {
     res.status(204).send({
       status: "success",
@@ -39,7 +39,7 @@ module.exports.fetchAllCategory = async (req, res) => {
 //delete category data
 module.exports.deleteCategory = async (req, res) => {
   console.log("This is req.params.id", req.params);
-  const data = await category.findByIdAndDelete(req.params.id);
+  const data = await categories.findByIdAndDelete(req.params.id);
 
   if (data) {
     return res.status(408).json({ error: "User not found" });

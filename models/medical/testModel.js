@@ -21,4 +21,4 @@ const testSchema = new mongoose.Schema({
     // unique:true,
   },
 });
-module.exports = mongoose.model("test", testSchema);
+module.exports = mongoose.model("tests", testSchema);
