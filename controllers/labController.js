@@ -86,12 +86,12 @@ module.exports.fetchTestData = async (req, res) => {
 
 // for delete data--users
 module.exports.deleteTest = async (req, res) => {
-  console.log("This is req.params.id", req.params);
-  const User = await tests.findByIdAndDelete(req.params.id);
+  console.log("This is req.params.id", req.query.id);
+  const data = await tests.findByIdAndDelete(req.query.id);
 
-  if (User) {
+  if (data) {
     return res.status(404).json({ error: "User not found" });
   }
 
-  res.json({ message: "Data deleted successfully", user: User });
+  res.json({ message: "Data deleted successfully", user: data });
 };
