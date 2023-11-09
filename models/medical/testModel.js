@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const testSchema = new mongoose.Schema({
+  Category: {
+    type: String,
+  },
   TestName: {
     type: String,
     // required:true,
