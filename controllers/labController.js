@@ -69,12 +69,12 @@ module.exports.addTest = async (req, res) => {
 
 // Get all test Data
 module.exports.fetchTestData = async (req, res) => {
-  const User = await tests.find();
-  if (User) {
-    res.status(204).send({
+  console.log("Fetching Test Data");
+  const data = await tests.find();
+  if (data) {
+    res.status(200).send({
       status: "success",
-
-      data: User,
+      data: data,
     });
   } else {
     res.status(505).send({
