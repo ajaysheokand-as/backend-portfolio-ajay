@@ -24,7 +24,7 @@ module.exports.addCategory = async (req, res) => {
 module.exports.fetchAllCategory = async (req, res) => {
   const allCategory = await categories.find();
   if (allCategory) {
-    res.status(204).send({
+    res.status(200).send({
       status: "success",
       data: allCategory,
     });
